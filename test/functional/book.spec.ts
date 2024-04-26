@@ -141,7 +141,10 @@ describe('book update api', async () => {
   it('should return 404 when book is missing', async () => {
     const response = await env.server.inject({
       url: `/books/update/${randomUUID()}`,
-      method: 'put'
+      method: 'put',
+      payload: {
+        title: 'Dune'
+      }
     })
     expect(response.statusCode).to.eql(404)
   })

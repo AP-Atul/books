@@ -47,4 +47,20 @@ export const register = (server: hapi.Server): void => {
       notes: 'If no id is passed, returns 404'
     }
   })
+
+  server.route({
+    method: 'put',
+    path: '/books/update/{id}',
+    options: {
+      handler: handler.update,
+      validate: {
+        params: schema.id,
+        payload: schema.update
+      },
+      tags: ['api', 'books'],
+      auth: false,
+      description: 'Delete book for the given id',
+      notes: 'If no id is passed, returns 404'
+    }
+  })
 }
