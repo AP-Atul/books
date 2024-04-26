@@ -1,7 +1,7 @@
 import * as hapi from '@hapi/hapi'
 import * as responses from '../responses'
 import * as repo from './repo'
-import { CreateBook } from './types'
+import { CreateBook, UpdateBook } from './types'
 
 export const create = async (
   request: hapi.Request,
@@ -31,4 +31,14 @@ export const delete_ = async (
   const deletes = await repo._delete(payload.id)
   if (deletes > 0) return responses.message(h, 'Deleted successfully')
   return responses.notfound(h, 'No such entity found')
+}
+
+export const update = async (
+  request: hapi.Request,
+  h: hapi.ResponseToolkit
+): Promise<hapi.ResponseObject> => {
+  const params = request.params as { id: string }
+  const updated = await repo.update(params.id, request.payload as UpdateBook)
+  if (updated) return responses.data(h, updated)
+  return responses.error(h, 'No such entity found or error updating')
 }
