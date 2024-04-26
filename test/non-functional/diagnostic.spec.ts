@@ -4,7 +4,7 @@ import 'mocha'
 import { getTestEnv } from '../environment'
 chai.use(chaiHttp)
 
-describe('Diagnostic API', async () => {
+describe('diagnostic', async () => {
   let testEnv
 
   beforeEach(async () => {

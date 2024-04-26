@@ -4,7 +4,7 @@ import 'mocha'
 import { getTestEnv } from '../environment'
 chai.use(chaiHttp)
 
-describe('Swagger API', async () => {
+describe('swagger', async () => {
   let testEnv
 
   beforeEach(async () => {
