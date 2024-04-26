@@ -40,5 +40,5 @@ export const update = async (
   const params = request.params as { id: string }
   const updated = await repo.update(params.id, request.payload as UpdateBook)
   if (updated) return responses.data(h, updated)
-  return responses.notfound(h, 'No such entity found')
+  return responses.error(h, 'No such entity found or error updating')
 }
