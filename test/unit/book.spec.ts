@@ -9,7 +9,7 @@ describe('book repo', async () => {
   let testEnv: TestServerEnvironment
   beforeEach(async () => {
     testEnv = await getTestEnv()
-    testEnv.resetDB()
+    await testEnv.resetDB()
   })
   it('should create a book', async () => {
     const result = await repo.create({
