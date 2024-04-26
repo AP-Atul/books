@@ -6,7 +6,7 @@ export const register = (server: hapi.Server): void => {
     path: '/internal/ping',
     options: {
       handler: () => 'pong',
-      tags: ['api', 'auth'],
+      tags: ['api', 'internal'],
       auth: false,
       description: 'Returns pong',
       notes: 'Diagnostic API responding to ping'

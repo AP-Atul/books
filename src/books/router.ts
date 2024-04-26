@@ -1,0 +1,20 @@
+import * as hapi from '@hapi/hapi'
+import * as handler from './handler'
+import * as schema from './schema'
+
+export const register = (server: hapi.Server): void => {
+  server.route({
+    method: 'post',
+    path: '/books/create',
+    options: {
+      handler: handler.create,
+      validate: {
+        payload: schema.create
+      },
+      tags: ['api', 'books'],
+      auth: false,
+      description: 'Creates book entity and returns it as response',
+      notes: 'May return error if book isbn already exists!'
+    }
+  })
+}
