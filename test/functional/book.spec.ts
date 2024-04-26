@@ -40,6 +40,26 @@ describe('book create api', async () => {
     const fromDb = await repo.get(book.id)
     expect(fromDb).to.eql(book)
   })
+  it('should fail to create for same isbn', async () => {
+    const payload = {
+      title: 'random',
+      author: 'random',
+      isbn: 'random',
+      publication_date: new Date().toISOString()
+    }
+    const response = await env.server.inject({
+      url: '/books/create',
+      method: 'post',
+      payload
+    })
+    expect(response.statusCode).to.eql(200)
+    const fail = await env.server.inject({
+      url: '/books/create',
+      method: 'post',
+      payload
+    })
+    expect(fail.statusCode).to.eql(400)
+  })
 })
 
 describe('book list api', async () => {
