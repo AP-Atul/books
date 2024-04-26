@@ -2,7 +2,7 @@ import * as hapi from '@hapi/hapi'
 import knex from '../src/db'
 import { init } from '../src/server'
 
-type TestServerEnvironment = {
+export type TestServerEnvironment = {
   server: hapi.Server
   resetDB: () => Promise<void>
 }
@@ -10,7 +10,7 @@ type TestServerEnvironment = {
 let testEnv: TestServerEnvironment | undefined = undefined
 
 const resetDB = async () => {
-  const query = ``
+  const query = `delete from books where true;`
   return knex.schema.raw(query)
 }
 
