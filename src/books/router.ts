@@ -17,4 +17,19 @@ export const register = (server: hapi.Server): void => {
       notes: 'May return error if book isbn already exists!'
     }
   })
+
+  server.route({
+    method: 'get',
+    path: '/books/list',
+    options: {
+      handler: handler.list,
+      validate: {
+        query: schema.list
+      },
+      tags: ['api', 'books'],
+      auth: false,
+      description: 'List books based on pagination param',
+      notes: 'If no page is passed, it will be set to 1'
+    }
+  })
 }

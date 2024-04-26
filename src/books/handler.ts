@@ -11,3 +11,14 @@ export const create = async (
   if (result) return responses.data(h, result)
   return responses.error(h, 'Error creating a new entry for book')
 }
+
+export const list = async (
+  request: hapi.Request,
+  h: hapi.ResponseToolkit
+): Promise<hapi.ResponseObject> => {
+  const page = request.query.page as number
+  const limit = 10
+  const offset = limit * (page - 1)
+  const books = await repo.list(offset, limit)
+  return responses.data(h, books)
+}
