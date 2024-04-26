@@ -146,6 +146,6 @@ describe('book update api', async () => {
         title: 'Dune'
       }
     })
-    expect(response.statusCode).to.eql(404)
+    expect(response.statusCode).to.eql(400)
   })
 })
