@@ -32,4 +32,19 @@ export const register = (server: hapi.Server): void => {
       notes: 'If no page is passed, it will be set to 1'
     }
   })
+
+  server.route({
+    method: 'delete',
+    path: '/books/delete/{id}',
+    options: {
+      handler: handler.delete_,
+      validate: {
+        params: schema.delete_
+      },
+      tags: ['api', 'books'],
+      auth: false,
+      description: 'Delete book for the given id',
+      notes: 'If no id is passed, returns 404'
+    }
+  })
 }

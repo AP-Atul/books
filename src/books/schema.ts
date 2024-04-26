@@ -10,3 +10,7 @@ export const create = joi.object({
 export const list = joi.object({
   page: joi.number().default(1)
 })
+
+export const delete_ = joi.object({
+  id: joi.string().required()
+})
