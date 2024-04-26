@@ -2,6 +2,7 @@ import * as hapi from '@hapi/hapi'
 import * as inert from '@hapi/inert'
 import * as vision from '@hapi/vision'
 import * as swagger from 'hapi-swagger'
+import * as books from './books/router'
 import config from './config'
 import * as diagnostic from './diagnostic/router'
 
@@ -46,6 +47,7 @@ export const init = async (): Promise<hapi.Server> => {
 
   // initialize routers
   diagnostic.register(server)
+  books.register(server)
 
   await server.initialize()
   return server
