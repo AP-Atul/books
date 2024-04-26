@@ -14,3 +14,10 @@ export interface CreateBook {
   isbn: string
   publication_date: string
 }
+
+export interface UpdateBook {
+  title?: string
+  author?: string
+  isbn?: string
+  publication_date?: string
+}
