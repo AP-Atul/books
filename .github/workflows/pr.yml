@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     container: node:18-alpine
-    name: Jest
+    name: Tests
 
     services:
       postgres:
@@ -20,7 +20,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: books_test
         options: >-
-          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 5
         ports:
           - 5432:5432
 
