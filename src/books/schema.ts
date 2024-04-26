@@ -6,3 +6,7 @@ export const create = joi.object({
   isbn: joi.string().required(),
   publication_date: joi.date().iso()
 })
+
+export const list = joi.object({
+  page: joi.number().default(1)
+})
