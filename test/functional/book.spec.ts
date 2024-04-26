@@ -1,5 +1,6 @@
 import chai, { expect } from 'chai'
 import chaiHttp from 'chai-http'
+import { randomUUID } from 'crypto'
 import 'mocha'
 import * as repo from '../../src/books/repo'
 import { Book } from '../../src/books/types'
@@ -41,7 +42,7 @@ describe('book create api', async () => {
   })
 })
 
-describe('book create api', async () => {
+describe('book list api', async () => {
   let env: TestServerEnvironment
   beforeEach(async () => {
     env = await getTestEnv()
@@ -71,7 +72,40 @@ describe('book create api', async () => {
       url: '/books/list?page=2', // getting page 2
       method: 'get'
     })
-    console.log(response.result)
     expect(response.result).to.length(10)
+  })
+})
+
+describe('book delete api', async () => {
+  let env: TestServerEnvironment
+  beforeEach(async () => {
+    env = await getTestEnv()
+    await env.resetDB()
+  })
+  const createBook = async (): Promise<string> => {
+    const book = await repo.create({
+      title: 'random',
+      author: 'random',
+      isbn: 'random',
+      publication_date: new Date().toISOString()
+    })
+    return book!.id
+  }
+  it('should delete a book if id matches', async () => {
+    const bookId = await createBook()
+    const response = await env.server.inject({
+      url: `/books/delete/${bookId}`,
+      method: 'delete'
+    })
+    expect(response.statusCode).to.eql(200)
+    const book = await repo.get(bookId)
+    expect(book).to.undefined
+  })
+  it('should return 404 when book is missing', async () => {
+    const response = await env.server.inject({
+      url: `/books/delete/${randomUUID()}`,
+      method: 'delete'
+    })
+    expect(response.statusCode).to.eql(404)
   })
 })

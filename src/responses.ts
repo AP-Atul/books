@@ -8,6 +8,10 @@ export const error = (h: hapi.ResponseToolkit, error: string): hapi.ResponseObje
   return h.response({ error }).code(400)
 }
 
+export const notfound = (h: hapi.ResponseToolkit, error: string): hapi.ResponseObject => {
+  return h.response({ error }).code(404)
+}
+
 export const message = (
   h: hapi.ResponseToolkit,
   message: string
